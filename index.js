@@ -5,7 +5,7 @@ try {
     console.log(`context: ${JSON.stringify(github.context)}`)
 
   // skip if not PR
-  if (github.context.action !== "pull_request") {
+  if (github.context.eventName !== "pull_request") {
       console.log("not a PR")
       return
   }
