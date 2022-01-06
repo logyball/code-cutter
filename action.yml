@@ -1,12 +1,9 @@
-name: 'Hello World GH example'
-description: 'Greet someone and record the time'
+name: 'Code Cutter'
+description: 'Create a comment on a PR if the PR deletes more code than it adds'
 inputs:
   github-token:  
     description: 'token'
     required: true
-# outputs:
-  # time: # id of output
-  #   description: 'The time we greeted you'
 runs:
   using: 'node16'
   main: 'dist/index.js'
