@@ -8451,6 +8451,11 @@ try {
       console.log("not a PR")
       return
   }
+
+  if (github.context.action !== "opened") {
+    console.log("PR is not new")
+    return
+  }
   const pr_payload = github.context.payload.pull_request;
   const token = core.getInput('github-token');
   let added = parseInt(pr_payload.additions);
@@ -8462,28 +8467,14 @@ try {
 
   const octokit = github.getOctokit(token)
 
-  octokit.rest.issues.get({
-    issue_number: pr_payload.number,
-    owner: github.context.repo.owner,
-    repo: github.context.repo.repo,
-  }).then((pr_object) => {
-    if (added > deleted) {  
-        pr_object.createComment({
-            issue_number: pr_payload.number,
-            owner: github.context.repo.owner,
-            repo: github.context.repo.repo,
-            body: "add code"
-          })
-      } else {
-        pr_object.createComment({
-            issue_number: pr_payload.number,
-            owner: github.context.repo.owner,
-            repo: github.context.repo.repo,
-            body: "del code"
-          })
-      }
-    }
-  )
+  if (added < deleted) {
+    octokit.rest.issues.createComment({
+        issue_number: pr_payload.number,
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo,
+        body: "🎉 🏆 This PR deletes more code than it adds! 🎉 🏆"
+    })
+  }
 
 } catch (error) {
   core.setFailed(error.message);
