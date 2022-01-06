@@ -11,12 +11,12 @@ try {
 
   console.log(`PR Payload: ${JSON.stringify(pr_payload, undefined, 2)}`);
 
-//   let added = JSON.parse(pr_payload.body).additions
-//   let subbed = JSON.parse(pr_payload.body).deletions
+  let added = JSON.parse(pr_payload).additions
+  let subbed = JSON.parse(pr_payload).deletions
 
   console.log(`The event payload: ${JSON.stringify(github.context.payload, undefined, 2)}`);
-//   console.log(`additions: ${added}`);
-//   console.log(`deleted: ${subbed}`);
+  console.log(`additions: ${added}`);
+  console.log(`deleted: ${subbed}`);
 
 
 } catch (error) {
