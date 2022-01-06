@@ -2,6 +2,8 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 try {
+    console.log(`context: ${github.context}`)
+
   // skip if not PR
   if (github.context.action !== "pull_request") {
       console.log("not a PR")
