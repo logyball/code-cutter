@@ -8446,7 +8446,7 @@ const core = __nccwpck_require__(7115);
 const github = __nccwpck_require__(3077);
 
 try {
-    console.log(`context: ${github.context}`)
+    console.log(`context: ${JSON.stringify(github.context)}`)
 
   // skip if not PR
   if (github.context.action !== "pull_request") {
