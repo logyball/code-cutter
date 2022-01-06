@@ -8448,16 +8448,16 @@ const github = __nccwpck_require__(3077);
 try {
   // skip if not PR
   if (github.context.eventName !== "pull_request") {
-      console.log("not a PR")
-      return
+    console.log("not a PR")
+    return
   }
 
-  console.log(`context: ${JSON.stringify(github.context, undefined, 2)}`)
-
+  // skip if PR is not freshly opened
   if (github.context.payload.action !== "opened") {
     console.log("PR is not new")
     return
   }
+
   const pr_payload = github.context.payload.pull_request;
   const token = core.getInput('github-token');
   let added = parseInt(pr_payload.additions);
@@ -8474,7 +8474,7 @@ try {
         issue_number: pr_payload.number,
         owner: github.context.repo.owner,
         repo: github.context.repo.repo,
-        body: "🎉 🏆 This PR deletes more code than it adds! 🎉 🏆"
+        body: "🎉 🏆 This PR deletes more code than it adds! 🏆 🎉"
     })
   }
 
