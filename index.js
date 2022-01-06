@@ -8,6 +8,8 @@ try {
       return
   }
 
+  console.log(`context: ${JSON.stringify(github.context)}`)
+
   if (github.context.action !== "opened") {
     console.log("PR is not new")
     return
