@@ -6,4 +6,3 @@ A Github Actions that creates a comment on a freshly made PR if it deletes more 
 
 - Add update functionality so that comments can be modified throughout the PR lifecycle
 - Update documentation
-- Public 
