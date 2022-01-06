@@ -8451,16 +8451,14 @@ try {
       console.log("not a PR")
       return
   }
-  const pr_payload = github.context.payload.pull_request
+  const pr_payload = github.context.payload.pull_request;
+  const token = core.getInput('github-token');
+  let added = pr_payload.additions;
+  let deleted = pr_payload.deletions;
 
-  console.log(`PR Payload: ${JSON.stringify(pr_payload, undefined, 2)}`);
-
-  let added = pr_payload.additions
-  let subbed = pr_payload.deletions
-
-  console.log(`The event payload: ${JSON.stringify(github.context.payload, undefined, 2)}`);
-  console.log(`additions: ${added}`);
-  console.log(`deleted: ${subbed}`);
+  if (token == "") {
+    throw new Error("no gh token");
+  }
 
 
 } catch (error) {
