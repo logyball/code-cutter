@@ -8460,7 +8460,7 @@ try {
     throw new Error("no gh token");
   }
 
-  const octokit = github.getOctokit(myToken)
+  const octokit = github.getOctokit(token)
 
   if (added > deleted) {
       octokit.rest.issues.createComment({
