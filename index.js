@@ -9,8 +9,8 @@ try {
   }
   const pr_payload = github.context.payload.pull_request;
   const token = core.getInput('github-token');
-  let added = int(pr_payload.additions);
-  let deleted = int(pr_payload.deletions);
+  let added = parseInt(pr_payload.additions);
+  let deleted = parseInt(pr_payload.deletions);
 
   if (token == "") {
     throw new Error("no gh token");
