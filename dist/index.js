@@ -8446,9 +8446,13 @@ const core = __nccwpck_require__(7115);
 const github = __nccwpck_require__(3077);
 
 try {
-  // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(github.context.payload, undefined, 2)
-  console.log(`The event payload: ${payload}`);
+  // skip if not PR
+  if (github.context.action !== "pull_request") {
+      console.log("not a PR")
+  }
+
+
+  console.log(`The event payload: ${JSON.stringify(github.context.payload, undefined, 2)}`);
 } catch (error) {
   core.setFailed(error.message);
 }
