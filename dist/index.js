@@ -8454,7 +8454,7 @@ try {
 
   console.log(`context: ${JSON.stringify(github.context, undefined, 2)}`)
 
-  if (github.context.action !== "opened") {
+  if (github.context.payload.action !== "opened") {
     console.log("PR is not new")
     return
   }
