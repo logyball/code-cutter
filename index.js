@@ -11,8 +11,8 @@ try {
 
   console.log(`PR Payload: ${JSON.stringify(pr_payload, undefined, 2)}`);
 
-  let added = JSON.parse(pr_payload).additions
-  let subbed = JSON.parse(pr_payload).deletions
+  let added = pr_payload.additions
+  let subbed = pr_payload.deletions
 
   console.log(`The event payload: ${JSON.stringify(github.context.payload, undefined, 2)}`);
   console.log(`additions: ${added}`);
