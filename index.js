@@ -9,13 +9,30 @@ try {
   }
   const pr_payload = github.context.payload.pull_request;
   const token = core.getInput('github-token');
-  let added = pr_payload.additions;
-  let deleted = pr_payload.deletions;
+  let added = int(pr_payload.additions);
+  let deleted = int(pr_payload.deletions);
 
   if (token == "") {
     throw new Error("no gh token");
   }
 
+  const octokit = github.getOctokit(myToken)
+
+  if (added > deleted) {
+      octokit.rest.issues.createComment({
+        issue_number: pr_payload.number,
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo,
+        body: "add code"
+      })
+  } else {
+    octokit.rest.issues.createComment({
+        issue_number: pr_payload.number,
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo,
+        body: "del code"
+      })
+  }
 
 } catch (error) {
   core.setFailed(error.message);
