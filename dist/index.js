@@ -8462,27 +8462,28 @@ try {
 
   const octokit = github.getOctokit(token)
 
-  let pr_object = octokit.rest.issues.get({
+  octokit.rest.issues.get({
     issue_number: pr_payload.number,
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
-  });
-
-  if (added > deleted) {  
-    pr_object.createComment({
-        issue_number: pr_payload.number,
-        owner: github.context.repo.owner,
-        repo: github.context.repo.repo,
-        body: "add code"
-      })
-  } else {
-    pr_object.createComment({
-        issue_number: pr_payload.number,
-        owner: github.context.repo.owner,
-        repo: github.context.repo.repo,
-        body: "del code"
-      })
-  }
+  }).then((pr_object) => {
+    if (added > deleted) {  
+        pr_object.createComment({
+            issue_number: pr_payload.number,
+            owner: github.context.repo.owner,
+            repo: github.context.repo.repo,
+            body: "add code"
+          })
+      } else {
+        pr_object.createComment({
+            issue_number: pr_payload.number,
+            owner: github.context.repo.owner,
+            repo: github.context.repo.repo,
+            body: "del code"
+          })
+      }
+    }
+  )
 
 } catch (error) {
   core.setFailed(error.message);
