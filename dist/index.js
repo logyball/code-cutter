@@ -8462,15 +8462,21 @@ try {
 
   const octokit = github.getOctokit(token)
 
-  if (added > deleted) {
-      octokit.rest.issues.createComment({
+  let pr_object = octokit.rest.issues.get({
+    issue_number: pr_payload.number,
+    owner: github.context.repo.owner,
+    repo: github.context.repo.repo,
+  });
+
+  if (added > deleted) {  
+    pr_object.createComment({
         issue_number: pr_payload.number,
         owner: github.context.repo.owner,
         repo: github.context.repo.repo,
         body: "add code"
       })
   } else {
-    octokit.rest.issues.createComment({
+    pr_object.createComment({
         issue_number: pr_payload.number,
         owner: github.context.repo.owner,
         repo: github.context.repo.repo,
