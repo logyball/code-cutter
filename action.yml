@@ -1,5 +1,5 @@
-name: 'Code Cutter'
-description: 'Create a comment on a PR if the PR deletes more code than it adds'
+name: 'Code Cutter Congratulator'
+description: 'Creates a comment on a PR if the PR deletes more code than it adds'
 inputs:
   github-token:  
     description: 'token'
